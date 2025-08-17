@@ -1,0 +1,30 @@
+[
+  {
+    "id": "mefuqnhrmgekez0ckbe",
+    "command": "npm run build",
+    "description": "构建TypeScript项目",
+    "category": "development",
+    "tags": [
+      "typescript",
+      "build",
+      "npm"
+    ],
+    "createdAt": "2025-08-17T15:39:47.439Z",
+    "usageCount": 0,
+    "context": "用户需要构建项目"
+  },
+  {
+    "id": "mefuqnhtmb9o8inpem",
+    "command": "git add . && git commit -m 'Update project'",
+    "description": "提交代码到Git",
+    "category": "git",
+    "tags": [
+      "git",
+      "commit",
+      "version-control"
+    ],
+    "createdAt": "2025-08-17T15:39:47.441Z",
+    "usageCount": 0,
+    "context": "用户需要提交代码更改"
+  }
+]

@@ -82,6 +82,73 @@ const testMessages = [
         path: "package.json"
       }
     }
+  },
+  // 测试添加命令
+  {
+    jsonrpc: "2.0",
+    id: 7,
+    method: "tools/call",
+    params: {
+      name: "add_command",
+      arguments: {
+        command: "npm run build",
+        description: "构建TypeScript项目",
+        category: "development",
+        tags: ["typescript", "build", "npm"],
+        context: "用户需要构建项目"
+      }
+    }
+  },
+  // 测试添加另一个命令
+  {
+    jsonrpc: "2.0",
+    id: 8,
+    method: "tools/call",
+    params: {
+      name: "add_command",
+      arguments: {
+        command: "git add . && git commit -m 'Update project'",
+        description: "提交代码到Git",
+        category: "git",
+        tags: ["git", "commit", "version-control"],
+        context: "用户需要提交代码更改"
+      }
+    }
+  },
+  // 测试搜索命令
+  {
+    jsonrpc: "2.0",
+    id: 9,
+    method: "tools/call",
+    params: {
+      name: "search_commands",
+      arguments: {
+        query: "npm",
+        limit: 5
+      }
+    }
+  },
+  // 测试获取统计信息
+  {
+    jsonrpc: "2.0",
+    id: 10,
+    method: "tools/call",
+    params: {
+      name: "get_command_stats",
+      arguments: {}
+    }
+  },
+  // 测试获取最常用命令
+  {
+    jsonrpc: "2.0",
+    id: 11,
+    method: "tools/call",
+    params: {
+      name: "get_most_used_commands",
+      arguments: {
+        limit: 3
+      }
+    }
   }
 ];
 
