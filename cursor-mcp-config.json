@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "dev-tools": {
+      "command": "node",
+      "args": ["/Users/rd1988/dev_tools/dist/server.js"],
+      "env": {}
+    }
+  }
+}

@@ -1,302 +1,149 @@
 #!/usr/bin/env node
 
 import { spawn } from 'child_process';
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 // 启动MCP服务器
-const server = spawn('node', ['dist/server.js'], {
+const serverProcess = spawn('node', [join(__dirname, 'dist', 'server.js')], {
   stdio: ['pipe', 'pipe', 'pipe']
 });
 
-// 测试消息
-const testMessages = [
-  // 初始化消息
-  {
-    jsonrpc: "2.0",
-    id: 1,
-    method: "initialize",
-    params: {
-      protocolVersion: "2024-11-05",
-      capabilities: {
-        tools: {}
-      },
-      clientInfo: {
-        name: "test-client",
-        version: "1.0.0"
-      }
-    }
-  },
-  // 列出工具
-  {
-    jsonrpc: "2.0",
-    id: 2,
-    method: "tools/list"
-  },
-  // 调用hello_world工具
-  {
-    jsonrpc: "2.0",
-    id: 3,
-    method: "tools/call",
-    params: {
-      name: "hello_world",
-      arguments: {
-        name: "World"
-      }
-    }
-  },
-  // 调用calculate工具
-  {
-    jsonrpc: "2.0",
-    id: 4,
-    method: "tools/call",
-    params: {
-      name: "calculate",
-      arguments: {
-        operation: "add",
-        a: 5,
-        b: 3
-      }
-    }
-  },
-  // 测试除法
-  {
-    jsonrpc: "2.0",
-    id: 5,
-    method: "tools/call",
-    params: {
-      name: "calculate",
-      arguments: {
-        operation: "divide",
-        a: 10,
-        b: 2
-      }
-    }
-  },
-  // 测试文件信息
-  {
-    jsonrpc: "2.0",
-    id: 6,
-    method: "tools/call",
-    params: {
-      name: "file_info",
-      arguments: {
-        path: "package.json"
-      }
-    }
-  },
-  // 测试添加命令
-  {
-    jsonrpc: "2.0",
-    id: 7,
-    method: "tools/call",
-    params: {
-      name: "add_command",
-      arguments: {
-        command: "npm run build",
-        description: "构建TypeScript项目",
-        category: "development",
-        tags: ["typescript", "build", "npm"],
-        context: "用户需要构建项目"
-      }
-    }
-  },
-  // 测试添加另一个命令
-  {
-    jsonrpc: "2.0",
-    id: 8,
-    method: "tools/call",
-    params: {
-      name: "add_command",
-      arguments: {
-        command: "git add . && git commit -m 'Update project'",
-        description: "提交代码到Git",
-        category: "git",
-        tags: ["git", "commit", "version-control"],
-        context: "用户需要提交代码更改"
-      }
-    }
-  },
-  // 测试搜索命令
-  {
-    jsonrpc: "2.0",
-    id: 9,
-    method: "tools/call",
-    params: {
-      name: "search_commands",
-      arguments: {
-        query: "npm",
-        limit: 5
-      }
-    }
-  },
-  // 测试获取统计信息
-  {
-    jsonrpc: "2.0",
-    id: 10,
-    method: "tools/call",
-    params: {
-      name: "get_command_stats",
-      arguments: {}
-    }
-  },
-  // 测试获取最常用命令
-  {
-    jsonrpc: "2.0",
-    id: 11,
-    method: "tools/call",
-    params: {
-      name: "get_most_used_commands",
-      arguments: {
-        limit: 3
-      }
-    }
-  },
-  // 测试添加上下文
-  {
-    jsonrpc: "2.0",
-    id: 12,
-    method: "tools/call",
-    params: {
-      name: "add_context",
-      arguments: {
-        key: "project",
-        title: "当前项目信息",
-        content: "这是一个TypeScript MCP服务器项目，位于/Users/rd1988/dev_tools，包含命令记忆和上下文记忆功能。项目使用Node.js、TypeScript、MCP SDK和Zod。",
-        category: "project",
-        tags: ["typescript", "mcp", "nodejs"],
-        priority: 5
-      }
-    }
-  },
-  // 测试添加另一个上下文
-  {
-    jsonrpc: "2.0",
-    id: 13,
-    method: "tools/call",
-    params: {
-      name: "add_context",
-      arguments: {
-        key: "dev",
-        title: "开发环境信息",
-        content: "开发环境：macOS 22.5.0，Node.js v20.19.4，使用zsh shell。常用工具：VS Code、Terminal、Git。",
-        category: "environment",
-        tags: ["macos", "nodejs", "development"],
-        priority: 4
-      }
-    }
-  },
-  // 测试根据关键词获取上下文
-  {
-    jsonrpc: "2.0",
-    id: 14,
-    method: "tools/call",
-    params: {
-      name: "get_context_by_key",
-      arguments: {
-        key: "project"
-      }
-    }
-  },
-  // 测试搜索上下文
-  {
-    jsonrpc: "2.0",
-    id: 15,
-    method: "tools/call",
-    params: {
-      name: "search_contexts",
-      arguments: {
-        query: "typescript",
-        limit: 5
-      }
-    }
-  },
-  // 测试获取所有关键词
-  {
-    jsonrpc: "2.0",
-    id: 16,
-    method: "tools/call",
-    params: {
-      name: "get_context_keys",
-      arguments: {}
-    }
-  },
-  // 测试获取上下文统计
-  {
-    jsonrpc: "2.0",
-    id: 17,
-    method: "tools/call",
-    params: {
-      name: "get_context_stats",
-      arguments: {}
-    }
-  },
-  // 测试智能保存prompt
-  {
-    jsonrpc: "2.0",
-    id: 18,
-    method: "tools/call",
-    params: {
-      name: "smart_save",
-      arguments: {
-        content: "帮我创建一个React组件，要求：1. 使用TypeScript 2. 支持props 3. 有状态管理 4. 响应式设计",
-        suggestedKey: "react-component-prompt",
-        suggestedTitle: "React组件创建prompt",
-        suggestedCategory: "prompt",
-        suggestedTags: ["react", "typescript", "component"],
-        suggestedPriority: 4
-      }
-    }
-  },
-  // 测试智能保存AI回答
-  {
-    jsonrpc: "2.0",
-    id: 19,
-    method: "tools/call",
-    params: {
-      name: "smart_save",
-      arguments: {
-        content: "Docker的基本使用命令：\n1. docker build -t myapp .\n2. docker run -d -p 8080:8080 myapp\n3. docker ps 查看运行容器\n4. docker logs container_id 查看日志",
-        suggestedCategory: "docker",
-        suggestedPriority: 3
-      }
-    }
-  }
-];
+let requestId = 1;
 
-let messageIndex = 0;
-
-// 处理服务器输出
-server.stdout.on('data', (data) => {
-  const response = data.toString().trim();
-  console.log('服务器响应:', response);
+// 发送JSON-RPC请求
+function sendRequest(method, params = {}) {
+  const request = {
+    jsonrpc: "2.0",
+    id: requestId++,
+    method: method,
+    params: params
+  };
   
-  // 发送下一个测试消息
-  if (messageIndex < testMessages.length) {
-    const message = testMessages[messageIndex];
-    console.log('发送消息:', JSON.stringify(message));
-    server.stdin.write(JSON.stringify(message) + '\n');
-    messageIndex++;
-  } else {
-    // 测试完成，关闭服务器
-    setTimeout(() => {
-      server.kill();
-      process.exit(0);
-    }, 1000);
+  console.log(`发送请求: ${JSON.stringify(request, null, 2)}`);
+  serverProcess.stdin.write(JSON.stringify(request) + '\n');
+}
+
+// 处理服务器响应
+serverProcess.stdout.on('data', (data) => {
+  const lines = data.toString().split('\n').filter(line => line.trim());
+  
+  for (const line of lines) {
+    try {
+      const response = JSON.parse(line);
+      console.log(`收到响应: ${JSON.stringify(response, null, 2)}`);
+      
+      if (response.error) {
+        console.error(`错误: ${response.error.message}`);
+      }
+    } catch (error) {
+      console.error(`解析响应失败: ${error.message}`);
+      console.error(`原始数据: ${line}`);
+    }
   }
 });
 
-// 处理错误
-server.stderr.on('data', (data) => {
-  console.log('服务器错误:', data.toString());
+// 处理服务器错误输出
+serverProcess.stderr.on('data', (data) => {
+  console.error(`服务器错误: ${data.toString()}`);
 });
 
-server.on('close', (code) => {
+// 处理服务器退出
+serverProcess.on('close', (code) => {
   console.log(`服务器进程退出，代码: ${code}`);
 });
 
-// 发送第一个消息
+// 等待服务器启动
 setTimeout(() => {
-  const message = testMessages[messageIndex];
-  console.log('发送消息:', JSON.stringify(message));
-  server.stdin.write(JSON.stringify(message) + '\n');
-  messageIndex++;
-}, 100);
+  console.log('\n=== 测试工具列表获取 ===');
+  
+  // 测试1: 获取工具列表
+  sendRequest('tools/list');
+  
+  // 测试2: 测试hello_world工具
+  setTimeout(() => {
+    console.log('\n=== 测试hello_world工具 ===');
+    sendRequest('tools/call', {
+      name: 'hello_world',
+      arguments: {
+        name: 'Test User'
+      }
+    });
+  }, 1000);
+  
+  // 测试3: 测试calculate工具
+  setTimeout(() => {
+    console.log('\n=== 测试calculate工具 ===');
+    sendRequest('tools/call', {
+      name: 'calculate',
+      arguments: {
+        operation: 'add',
+        a: 5,
+        b: 3
+      }
+    });
+  }, 2000);
+  
+  // 测试4: 测试file_info工具
+  setTimeout(() => {
+    console.log('\n=== 测试file_info工具 ===');
+    sendRequest('tools/call', {
+      name: 'file_info',
+      arguments: {
+        path: './package.json'
+      }
+    });
+  }, 3000);
+  
+  // 测试5: 测试add_command工具
+  setTimeout(() => {
+    console.log('\n=== 测试add_command工具 ===');
+    sendRequest('tools/call', {
+      name: 'add_command',
+      arguments: {
+        command: 'npm install',
+        description: '安装项目依赖',
+        category: 'npm',
+        tags: ['install', 'dependencies']
+      }
+    });
+  }, 4000);
+  
+  // 测试6: 测试add_context工具
+  setTimeout(() => {
+    console.log('\n=== 测试add_context工具 ===');
+    sendRequest('tools/call', {
+      name: 'add_context',
+      arguments: {
+        key: 'test-key',
+        title: '测试上下文',
+        content: '这是一个测试上下文内容',
+        category: 'test',
+        tags: ['test', 'example']
+      }
+    });
+  }, 5000);
+  
+  // 测试7: 测试smart_save工具
+  setTimeout(() => {
+    console.log('\n=== 测试smart_save工具 ===');
+    sendRequest('tools/call', {
+      name: 'smart_save',
+      arguments: {
+        content: '这是一个TypeScript项目，使用了MCP协议。',
+        suggestedCategory: 'typescript',
+        suggestedTags: ['typescript', 'mcp']
+      }
+    });
+  }, 6000);
+  
+  // 结束测试
+  setTimeout(() => {
+    console.log('\n=== 测试完成，关闭服务器 ===');
+    serverProcess.kill();
+  }, 7000);
+  
+}, 1000);

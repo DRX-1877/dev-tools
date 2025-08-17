@@ -110,5 +110,41 @@
     "createdAt": "2025-08-17T15:59:38.897Z",
     "usageCount": 0,
     "context": "用户需要提交代码更改"
+  },
+  {
+    "id": "mefybcovhaetzxlkbvl",
+    "command": "npm install",
+    "description": "安装项目依赖",
+    "category": "npm",
+    "tags": [
+      "install",
+      "dependencies"
+    ],
+    "createdAt": "2025-08-17T17:19:52.063Z",
+    "usageCount": 0
+  },
+  {
+    "id": "meg0z52iaraf6i69je6",
+    "command": "npm install",
+    "description": "安装项目依赖",
+    "category": "npm",
+    "tags": [
+      "install",
+      "dependencies"
+    ],
+    "createdAt": "2025-08-17T18:34:21.162Z",
+    "usageCount": 0
+  },
+  {
+    "id": "meg14mnh4an5d5cp1dc",
+    "command": "npm install",
+    "description": "安装项目依赖",
+    "category": "npm",
+    "tags": [
+      "install",
+      "dependencies"
+    ],
+    "createdAt": "2025-08-17T18:38:37.229Z",
+    "usageCount": 0
   }
 ]

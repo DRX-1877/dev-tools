@@ -3,6 +3,7 @@
 import { Server } from "@modelcontextprotocol/sdk/server/index.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { z } from "zod";
+import { zodToJsonSchema } from "zod-to-json-schema";
 import { commandMemory } from "./command-memory.js";
 import { contextMemory } from "./context-memory.js";
 
@@ -18,6 +19,11 @@ const server = new Server(
     },
   }
 );
+
+// 将Zod schema转换为JSON Schema格式
+function convertZodToJsonSchema(zodSchema: z.ZodType<any>): any {
+  return zodToJsonSchema(zodSchema);
+}
 
 // 定义工具的参数模式
 const HelloWorldArgsSchema = z.object({
@@ -124,148 +130,148 @@ const tools = [
   {
     name: "hello_world",
     description: "一个简单的问候工具",
-    inputSchema: HelloWorldArgsSchema,
+    inputSchema: convertZodToJsonSchema(HelloWorldArgsSchema),
   },
   {
     name: "calculate",
     description: "简单的计算器",
-    inputSchema: CalculateArgsSchema,
+    inputSchema: convertZodToJsonSchema(CalculateArgsSchema),
   },
   {
     name: "file_info",
     description: "获取文件信息",
-    inputSchema: FileInfoArgsSchema,
+    inputSchema: convertZodToJsonSchema(FileInfoArgsSchema),
   },
   {
     name: "add_command",
     description: "保存AI生成的命令到记忆中",
-    inputSchema: AddCommandArgsSchema,
+    inputSchema: convertZodToJsonSchema(AddCommandArgsSchema),
   },
   {
     name: "search_commands",
     description: "搜索之前保存的命令",
-    inputSchema: SearchCommandsArgsSchema,
+    inputSchema: convertZodToJsonSchema(SearchCommandsArgsSchema),
   },
   {
     name: "get_command",
     description: "根据ID获取特定命令",
-    inputSchema: GetCommandArgsSchema,
+    inputSchema: convertZodToJsonSchema(GetCommandArgsSchema),
   },
   {
     name: "get_commands_by_category",
     description: "获取指定类别的所有命令",
-    inputSchema: GetCommandsByCategoryArgsSchema,
+    inputSchema: convertZodToJsonSchema(GetCommandsByCategoryArgsSchema),
   },
   {
     name: "get_most_used_commands",
     description: "获取最常用的命令",
-    inputSchema: z.object({
+    inputSchema: convertZodToJsonSchema(z.object({
       limit: z.number().optional().describe("返回结果数量限制"),
-    }),
+    })),
   },
   {
     name: "get_recent_commands",
     description: "获取最近添加的命令",
-    inputSchema: z.object({
+    inputSchema: convertZodToJsonSchema(z.object({
       limit: z.number().optional().describe("返回结果数量限制"),
-    }),
+    })),
   },
   {
     name: "get_command_categories",
     description: "获取所有命令类别",
-    inputSchema: z.object({}),
+    inputSchema: convertZodToJsonSchema(z.object({})),
   },
   {
     name: "get_command_stats",
     description: "获取命令记忆统计信息",
-    inputSchema: z.object({}),
+    inputSchema: convertZodToJsonSchema(z.object({})),
   },
   {
     name: "update_command",
     description: "更新已保存的命令",
-    inputSchema: UpdateCommandArgsSchema,
+    inputSchema: convertZodToJsonSchema(UpdateCommandArgsSchema),
   },
   {
     name: "delete_command",
     description: "删除已保存的命令",
-    inputSchema: DeleteCommandArgsSchema,
+    inputSchema: convertZodToJsonSchema(DeleteCommandArgsSchema),
   },
   // 上下文记忆工具
   {
     name: "add_context",
     description: "保存常用的上下文信息",
-    inputSchema: AddContextArgsSchema,
+    inputSchema: convertZodToJsonSchema(AddContextArgsSchema),
   },
   {
     name: "get_context_by_key",
     description: "根据关键词快速获取上下文",
-    inputSchema: GetContextByKeyArgsSchema,
+    inputSchema: convertZodToJsonSchema(GetContextByKeyArgsSchema),
   },
   {
     name: "get_context_by_id",
     description: "根据ID获取上下文",
-    inputSchema: GetContextByIdArgsSchema,
+    inputSchema: convertZodToJsonSchema(GetContextByIdArgsSchema),
   },
   {
     name: "search_contexts",
     description: "搜索上下文信息",
-    inputSchema: SearchContextsArgsSchema,
+    inputSchema: convertZodToJsonSchema(SearchContextsArgsSchema),
   },
   {
     name: "get_contexts_by_category",
     description: "获取指定类别的所有上下文",
-    inputSchema: GetContextsByCategoryArgsSchema,
+    inputSchema: convertZodToJsonSchema(GetContextsByCategoryArgsSchema),
   },
   {
     name: "get_most_used_contexts",
     description: "获取最常用的上下文",
-    inputSchema: z.object({
+    inputSchema: convertZodToJsonSchema(z.object({
       limit: z.number().optional().describe("返回结果数量限制"),
-    }),
+    })),
   },
   {
     name: "get_high_priority_contexts",
     description: "获取高优先级的上下文",
-    inputSchema: z.object({
+    inputSchema: convertZodToJsonSchema(z.object({
       limit: z.number().optional().describe("返回结果数量限制"),
-    }),
+    })),
   },
   {
     name: "get_recent_contexts",
     description: "获取最近添加的上下文",
-    inputSchema: z.object({
+    inputSchema: convertZodToJsonSchema(z.object({
       limit: z.number().optional().describe("返回结果数量限制"),
-    }),
+    })),
   },
   {
     name: "get_context_categories",
     description: "获取所有上下文类别",
-    inputSchema: z.object({}),
+    inputSchema: convertZodToJsonSchema(z.object({})),
   },
   {
     name: "get_context_keys",
     description: "获取所有可用的关键词",
-    inputSchema: z.object({}),
+    inputSchema: convertZodToJsonSchema(z.object({})),
   },
   {
     name: "get_context_stats",
     description: "获取上下文记忆统计信息",
-    inputSchema: z.object({}),
+    inputSchema: convertZodToJsonSchema(z.object({})),
   },
   {
     name: "update_context",
     description: "更新已保存的上下文",
-    inputSchema: UpdateContextArgsSchema,
+    inputSchema: convertZodToJsonSchema(UpdateContextArgsSchema),
   },
   {
     name: "delete_context",
     description: "删除已保存的上下文",
-    inputSchema: DeleteContextArgsSchema,
+    inputSchema: convertZodToJsonSchema(DeleteContextArgsSchema),
   },
   {
     name: "smart_save",
     description: "智能保存任何内容（AI回答、prompt、代码片段等）",
-    inputSchema: SmartSaveArgsSchema,
+    inputSchema: convertZodToJsonSchema(SmartSaveArgsSchema),
   },
 ];
 

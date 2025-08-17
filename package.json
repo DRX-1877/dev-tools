@@ -12,7 +12,11 @@
     "dev": "ts-node --esm src/server.ts",
     "test": "node test-mcp.js"
   },
-  "keywords": ["mcp", "typescript", "server"],
+  "keywords": [
+    "mcp",
+    "typescript",
+    "server"
+  ],
   "author": "",
   "license": "ISC",
   "description": "MCP服务器示例",
@@ -23,6 +27,7 @@
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.17.3",
-    "zod": "^3.25.76"
+    "zod": "^3.25.76",
+    "zod-to-json-schema": "^3.24.6"
   }
 }

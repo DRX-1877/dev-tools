@@ -200,6 +200,23 @@ node test-mcp.js
 }
 ```
 
+**注意**: 确保使用绝对路径指向编译后的 `dist/server.js` 文件。
+
+## 故障排除
+
+### 工具列表无法获取
+如果Cursor无法正确获取工具列表，请检查：
+
+1. **确保项目已编译**: 运行 `npm run build` 确保生成了 `dist/server.js` 文件
+2. **检查路径**: 确保MCP配置文件中的路径指向正确的 `dist/server.js` 文件
+3. **验证服务器**: 运行 `node test-mcp.js` 或 `node simple-test.js` 验证服务器功能
+4. **重启Cursor**: 修改MCP配置后需要重启Cursor才能生效
+
+### 常见错误
+- **"Maximum call stack size exceeded"**: 通常是Zod schema转换问题，已在此版本中修复
+- **"Unknown tool"**: 确保工具名称在代码中正确定义
+- **连接失败**: 检查Node.js版本和依赖是否正确安装
+
 ## 开发
 
 ### 项目结构
