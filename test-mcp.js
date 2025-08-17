@@ -149,6 +149,85 @@ const testMessages = [
         limit: 3
       }
     }
+  },
+  // 测试添加上下文
+  {
+    jsonrpc: "2.0",
+    id: 12,
+    method: "tools/call",
+    params: {
+      name: "add_context",
+      arguments: {
+        key: "project",
+        title: "当前项目信息",
+        content: "这是一个TypeScript MCP服务器项目，位于/Users/rd1988/dev_tools，包含命令记忆和上下文记忆功能。项目使用Node.js、TypeScript、MCP SDK和Zod。",
+        category: "project",
+        tags: ["typescript", "mcp", "nodejs"],
+        priority: 5
+      }
+    }
+  },
+  // 测试添加另一个上下文
+  {
+    jsonrpc: "2.0",
+    id: 13,
+    method: "tools/call",
+    params: {
+      name: "add_context",
+      arguments: {
+        key: "dev",
+        title: "开发环境信息",
+        content: "开发环境：macOS 22.5.0，Node.js v20.19.4，使用zsh shell。常用工具：VS Code、Terminal、Git。",
+        category: "environment",
+        tags: ["macos", "nodejs", "development"],
+        priority: 4
+      }
+    }
+  },
+  // 测试根据关键词获取上下文
+  {
+    jsonrpc: "2.0",
+    id: 14,
+    method: "tools/call",
+    params: {
+      name: "get_context_by_key",
+      arguments: {
+        key: "project"
+      }
+    }
+  },
+  // 测试搜索上下文
+  {
+    jsonrpc: "2.0",
+    id: 15,
+    method: "tools/call",
+    params: {
+      name: "search_contexts",
+      arguments: {
+        query: "typescript",
+        limit: 5
+      }
+    }
+  },
+  // 测试获取所有关键词
+  {
+    jsonrpc: "2.0",
+    id: 16,
+    method: "tools/call",
+    params: {
+      name: "get_context_keys",
+      arguments: {}
+    }
+  },
+  // 测试获取上下文统计
+  {
+    jsonrpc: "2.0",
+    id: 17,
+    method: "tools/call",
+    params: {
+      name: "get_context_stats",
+      arguments: {}
+    }
   }
 ];
 

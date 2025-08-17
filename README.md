@@ -62,6 +62,62 @@
 13. **delete_command** - 删除已保存的命令
     - 参数：`id` (string) - 命令ID
 
+### 上下文记忆工具
+
+14. **add_context** - 保存常用的上下文信息
+    - 参数：
+      - `key` (string) - 简短的缩略词/关键词
+      - `title` (string) - 上下文标题
+      - `content` (string) - 完整的上下文内容
+      - `category` (string, 可选) - 分类
+      - `tags` (string[], 可选) - 标签
+      - `priority` (number, 可选) - 优先级 (1-5)
+
+15. **get_context_by_key** - 根据关键词快速获取上下文
+    - 参数：`key` (string) - 关键词
+
+16. **get_context_by_id** - 根据ID获取上下文
+    - 参数：`id` (string) - 上下文ID
+
+17. **search_contexts** - 搜索上下文信息
+    - 参数：
+      - `query` (string) - 搜索关键词
+      - `limit` (number, 可选) - 返回结果数量限制
+
+18. **get_contexts_by_category** - 获取指定类别的所有上下文
+    - 参数：`category` (string) - 类别名称
+
+19. **get_most_used_contexts** - 获取最常用的上下文
+    - 参数：`limit` (number, 可选) - 返回结果数量限制
+
+20. **get_high_priority_contexts** - 获取高优先级的上下文
+    - 参数：`limit` (number, 可选) - 返回结果数量限制
+
+21. **get_recent_contexts** - 获取最近添加的上下文
+    - 参数：`limit` (number, 可选) - 返回结果数量限制
+
+22. **get_context_categories** - 获取所有上下文类别
+    - 参数：无
+
+23. **get_context_keys** - 获取所有可用的关键词
+    - 参数：无
+
+24. **get_context_stats** - 获取上下文记忆统计信息
+    - 参数：无
+
+25. **update_context** - 更新已保存的上下文
+    - 参数：
+      - `id` (string) - 上下文ID
+      - `key` (string, 可选) - 新关键词
+      - `title` (string, 可选) - 新标题
+      - `content` (string, 可选) - 新内容
+      - `category` (string, 可选) - 新类别
+      - `tags` (string[], 可选) - 新标签
+      - `priority` (number, 可选) - 新优先级
+
+26. **delete_context** - 删除已保存的上下文
+    - 参数：`id` (string) - 上下文ID
+
 ## 安装和运行
 
 ### 1. 安装依赖
@@ -99,6 +155,7 @@ node test-mcp.js
 - calculate 工具的各种运算
 - file_info 工具的文件信息获取
 - 命令记忆工具的完整功能（添加、搜索、统计等）
+- 上下文记忆工具的完整功能（添加、关键词检索、搜索、统计等）
 
 ## 与AI模型集成
 
@@ -140,9 +197,11 @@ node test-mcp.js
 dev-tools/
 ├── src/
 │   ├── server.ts          # MCP服务器主文件
-│   └── command-memory.ts  # 命令记忆管理器
+│   ├── command-memory.ts  # 命令记忆管理器
+│   └── context-memory.ts  # 上下文记忆管理器
 ├── dist/                  # 编译后的JavaScript文件
 ├── command-memory.json    # 命令记忆数据文件
+├── context-memory.json    # 上下文记忆数据文件
 ├── test-mcp.js           # 测试文件
 ├── package.json
 ├── tsconfig.json

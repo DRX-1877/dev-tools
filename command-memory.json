@@ -26,5 +26,61 @@
     "createdAt": "2025-08-17T15:39:47.441Z",
     "usageCount": 0,
     "context": "用户需要提交代码更改"
+  },
+  {
+    "id": "mefus7ctmf1cwmr1oq",
+    "command": "npm run build",
+    "description": "构建TypeScript项目",
+    "category": "development",
+    "tags": [
+      "typescript",
+      "build",
+      "npm"
+    ],
+    "createdAt": "2025-08-17T15:40:59.837Z",
+    "usageCount": 0,
+    "context": "用户需要构建项目"
+  },
+  {
+    "id": "mefus7cvvcoax4xipo",
+    "command": "git add . && git commit -m 'Update project'",
+    "description": "提交代码到Git",
+    "category": "git",
+    "tags": [
+      "git",
+      "commit",
+      "version-control"
+    ],
+    "createdAt": "2025-08-17T15:40:59.839Z",
+    "usageCount": 0,
+    "context": "用户需要提交代码更改"
+  },
+  {
+    "id": "mefuz4yulryxuw2pqy",
+    "command": "npm run build",
+    "description": "构建TypeScript项目",
+    "category": "development",
+    "tags": [
+      "typescript",
+      "build",
+      "npm"
+    ],
+    "createdAt": "2025-08-17T15:46:23.334Z",
+    "usageCount": 0,
+    "context": "用户需要构建项目"
+  },
+  {
+    "id": "mefuz4yvw1disp6541",
+    "command": "git add . && git commit -m 'Update project'",
+    "description": "提交代码到Git",
+    "category": "git",
+    "tags": [
+      "git",
+      "commit",
+      "version-control"
+    ],
+    "createdAt": "2025-08-17T15:46:23.335Z",
+    "usageCount": 0,
+    "context": "用户需要提交代码更改"
   }
 ]

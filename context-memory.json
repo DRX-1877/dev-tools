@@ -1,0 +1,32 @@
+[
+  {
+    "id": "mefuz4z0eww4t0lh20h",
+    "key": "project",
+    "title": "当前项目信息",
+    "content": "这是一个TypeScript MCP服务器项目，位于/Users/rd1988/dev_tools，包含命令记忆和上下文记忆功能。项目使用Node.js、TypeScript、MCP SDK和Zod。",
+    "category": "project",
+    "tags": [
+      "typescript",
+      "mcp",
+      "nodejs"
+    ],
+    "createdAt": "2025-08-17T15:46:23.340Z",
+    "usageCount": 0,
+    "priority": 5
+  },
+  {
+    "id": "mefuz4z0dhzuk79b4h8",
+    "key": "dev",
+    "title": "开发环境信息",
+    "content": "开发环境：macOS 22.5.0，Node.js v20.19.4，使用zsh shell。常用工具：VS Code、Terminal、Git。",
+    "category": "environment",
+    "tags": [
+      "macos",
+      "nodejs",
+      "development"
+    ],
+    "createdAt": "2025-08-17T15:46:23.340Z",
+    "usageCount": 0,
+    "priority": 4
+  }
+]
