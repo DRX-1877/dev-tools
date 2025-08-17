@@ -28,5 +28,63 @@
     "createdAt": "2025-08-17T15:46:23.340Z",
     "usageCount": 0,
     "priority": 4
+  },
+  {
+    "id": "mefvg6tyf8adfo5grxc",
+    "key": "project",
+    "title": "当前项目信息",
+    "content": "这是一个TypeScript MCP服务器项目，位于/Users/rd1988/dev_tools，包含命令记忆和上下文记忆功能。项目使用Node.js、TypeScript、MCP SDK和Zod。",
+    "category": "project",
+    "tags": [
+      "typescript",
+      "mcp",
+      "nodejs"
+    ],
+    "createdAt": "2025-08-17T15:59:38.902Z",
+    "usageCount": 0,
+    "priority": 5
+  },
+  {
+    "id": "mefvg6u1n25oop6f36i",
+    "key": "dev",
+    "title": "开发环境信息",
+    "content": "开发环境：macOS 22.5.0，Node.js v20.19.4，使用zsh shell。常用工具：VS Code、Terminal、Git。",
+    "category": "environment",
+    "tags": [
+      "macos",
+      "nodejs",
+      "development"
+    ],
+    "createdAt": "2025-08-17T15:59:38.905Z",
+    "usageCount": 0,
+    "priority": 4
+  },
+  {
+    "id": "mefvg6u536p10tmpn75",
+    "key": "react-component-prompt",
+    "title": "React组件创建prompt",
+    "content": "帮我创建一个React组件，要求：1. 使用TypeScript 2. 支持props 3. 有状态管理 4. 响应式设计",
+    "category": "prompt",
+    "tags": [
+      "react",
+      "typescript",
+      "component"
+    ],
+    "createdAt": "2025-08-17T15:59:38.909Z",
+    "usageCount": 0,
+    "priority": 4
+  },
+  {
+    "id": "mefvg6u60jt7auiazml",
+    "key": "docker-1-docker",
+    "title": "Docker的基本使用命令：",
+    "content": "Docker的基本使用命令：\n1. docker build -t myapp .\n2. docker run -d -p 8080:8080 myapp\n3. docker ps 查看运行容器\n4. docker logs container_id 查看日志",
+    "category": "docker",
+    "tags": [
+      "docker"
+    ],
+    "createdAt": "2025-08-17T15:59:38.910Z",
+    "usageCount": 0,
+    "priority": 3
   }
 ]

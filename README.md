@@ -118,6 +118,15 @@
 26. **delete_context** - 删除已保存的上下文
     - 参数：`id` (string) - 上下文ID
 
+27. **smart_save** - 智能保存任何内容（AI回答、prompt、代码片段等）
+    - 参数：
+      - `content` (string) - 要保存的内容
+      - `suggestedKey` (string, 可选) - 建议的关键词
+      - `suggestedTitle` (string, 可选) - 建议的标题
+      - `suggestedCategory` (string, 可选) - 建议的分类
+      - `suggestedTags` (string[], 可选) - 建议的标签
+      - `suggestedPriority` (number, 可选) - 建议的优先级 (1-5)
+
 ## 安装和运行
 
 ### 1. 安装依赖
@@ -156,6 +165,7 @@ node test-mcp.js
 - file_info 工具的文件信息获取
 - 命令记忆工具的完整功能（添加、搜索、统计等）
 - 上下文记忆工具的完整功能（添加、关键词检索、搜索、统计等）
+- 智能保存工具的完整功能（自动生成关键词、标题、标签等）
 
 ## 与AI模型集成
 

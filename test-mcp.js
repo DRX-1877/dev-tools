@@ -228,6 +228,37 @@ const testMessages = [
       name: "get_context_stats",
       arguments: {}
     }
+  },
+  // 测试智能保存prompt
+  {
+    jsonrpc: "2.0",
+    id: 18,
+    method: "tools/call",
+    params: {
+      name: "smart_save",
+      arguments: {
+        content: "帮我创建一个React组件，要求：1. 使用TypeScript 2. 支持props 3. 有状态管理 4. 响应式设计",
+        suggestedKey: "react-component-prompt",
+        suggestedTitle: "React组件创建prompt",
+        suggestedCategory: "prompt",
+        suggestedTags: ["react", "typescript", "component"],
+        suggestedPriority: 4
+      }
+    }
+  },
+  // 测试智能保存AI回答
+  {
+    jsonrpc: "2.0",
+    id: 19,
+    method: "tools/call",
+    params: {
+      name: "smart_save",
+      arguments: {
+        content: "Docker的基本使用命令：\n1. docker build -t myapp .\n2. docker run -d -p 8080:8080 myapp\n3. docker ps 查看运行容器\n4. docker logs container_id 查看日志",
+        suggestedCategory: "docker",
+        suggestedPriority: 3
+      }
+    }
   }
 ];
 

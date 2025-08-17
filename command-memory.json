@@ -82,5 +82,33 @@
     "createdAt": "2025-08-17T15:46:23.335Z",
     "usageCount": 0,
     "context": "用户需要提交代码更改"
+  },
+  {
+    "id": "mefvg6trc796mjvto38",
+    "command": "npm run build",
+    "description": "构建TypeScript项目",
+    "category": "development",
+    "tags": [
+      "typescript",
+      "build",
+      "npm"
+    ],
+    "createdAt": "2025-08-17T15:59:38.895Z",
+    "usageCount": 0,
+    "context": "用户需要构建项目"
+  },
+  {
+    "id": "mefvg6ttu27i0gzv84k",
+    "command": "git add . && git commit -m 'Update project'",
+    "description": "提交代码到Git",
+    "category": "git",
+    "tags": [
+      "git",
+      "commit",
+      "version-control"
+    ],
+    "createdAt": "2025-08-17T15:59:38.897Z",
+    "usageCount": 0,
+    "context": "用户需要提交代码更改"
   }
 ]

@@ -109,6 +109,16 @@ const DeleteContextArgsSchema = z.object({
   id: z.string().describe("上下文ID"),
 });
 
+// 智能保存工具的参数模式
+const SmartSaveArgsSchema = z.object({
+  content: z.string().describe("要保存的内容（可以是AI回答、prompt、代码片段等）"),
+  suggestedKey: z.string().optional().describe("建议的关键词"),
+  suggestedTitle: z.string().optional().describe("建议的标题"),
+  suggestedCategory: z.string().optional().describe("建议的分类"),
+  suggestedTags: z.array(z.string()).optional().describe("建议的标签"),
+  suggestedPriority: z.number().optional().describe("建议的优先级 (1-5)"),
+});
+
 // 定义工具列表
 const tools = [
   {
@@ -251,6 +261,11 @@ const tools = [
     name: "delete_context",
     description: "删除已保存的上下文",
     inputSchema: DeleteContextArgsSchema,
+  },
+  {
+    name: "smart_save",
+    description: "智能保存任何内容（AI回答、prompt、代码片段等）",
+    inputSchema: SmartSaveArgsSchema,
   },
 ];
 
@@ -906,6 +921,35 @@ server.setRequestHandler(
         };
       }
 
+      case "smart_save": {
+        const { 
+          content, 
+          suggestedKey, 
+          suggestedTitle, 
+          suggestedCategory = "general", 
+          suggestedTags = [], 
+          suggestedPriority = 3 
+        } = SmartSaveArgsSchema.parse(args);
+        
+        // 生成关键词和标题
+        const key = suggestedKey || generateKeyFromContent(content);
+        const title = suggestedTitle || generateTitleFromContent(content);
+        
+        // 提取标签
+        const tags = suggestedTags.length > 0 ? suggestedTags : extractTagsFromContent(content);
+        
+        const id = await contextMemory.addContext(key, title, content, suggestedCategory, tags, suggestedPriority);
+        
+        return {
+          content: [
+            {
+              type: "text",
+              text: `内容已智能保存！\n关键词: ${key}\n标题: ${title}\n类别: ${suggestedCategory}\n优先级: ${suggestedPriority}\n标签: ${tags.join(", ")}\n\n保存的内容:\n${content.substring(0, 200)}${content.length > 200 ? "..." : ""}`,
+            },
+          ],
+        };
+      }
+
       default:
         return {
           content: [
@@ -918,6 +962,43 @@ server.setRequestHandler(
     }
   }
 );
+
+// 辅助方法：从内容生成关键词
+function generateKeyFromContent(content: string): string {
+  // 提取前几个单词作为关键词
+  const words = content.toLowerCase().split(/\s+/).slice(0, 3);
+  return words.join('-').replace(/[^a-z0-9-]/g, '');
+}
+
+// 辅助方法：从内容生成标题
+function generateTitleFromContent(content: string): string {
+  // 提取第一行或前50个字符作为标题
+  const firstLine = content.split('\n')[0];
+  return firstLine.length > 50 ? firstLine.substring(0, 50) + '...' : firstLine;
+}
+
+// 辅助方法：从内容提取标签
+function extractTagsFromContent(content: string): string[] {
+  const tags = new Set<string>();
+  
+  // 提取技术关键词
+  const techKeywords = ['typescript', 'javascript', 'python', 'java', 'docker', 'git', 'npm', 'node', 'react', 'vue', 'angular', 'sql', 'mongodb', 'redis', 'aws', 'azure', 'linux', 'macos', 'windows'];
+  
+  const lowerContent = content.toLowerCase();
+  techKeywords.forEach(keyword => {
+    if (lowerContent.includes(keyword)) {
+      tags.add(keyword);
+    }
+  });
+  
+  // 提取其他常见关键词
+  if (lowerContent.includes('config') || lowerContent.includes('configuration')) tags.add('config');
+  if (lowerContent.includes('setup') || lowerContent.includes('install')) tags.add('setup');
+  if (lowerContent.includes('error') || lowerContent.includes('debug')) tags.add('debug');
+  if (lowerContent.includes('api') || lowerContent.includes('rest')) tags.add('api');
+  
+  return Array.from(tags);
+}
 
 // 启动服务器
 async function main() {
