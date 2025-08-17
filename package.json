@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "main": "dist/server.js",
   "type": "module",
+  "bin": {
+    "dev-tools-mcp": "./dist/server.js"
+  },
   "scripts": {
     "build": "tsc",
     "start": "node dist/server.js",
