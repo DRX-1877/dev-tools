@@ -1,0 +1,25 @@
+{
+  "name": "dev_tools",
+  "version": "1.0.0",
+  "main": "dist/server.js",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/server.js",
+    "dev": "ts-node --esm src/server.ts",
+    "test": "node test-mcp.js"
+  },
+  "keywords": ["mcp", "typescript", "server"],
+  "author": "",
+  "license": "ISC",
+  "description": "MCP服务器示例",
+  "devDependencies": {
+    "@types/node": "^24.3.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.2"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.17.3",
+    "zod": "^3.25.76"
+  }
+}
