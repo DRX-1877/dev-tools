@@ -58,3 +58,7 @@ jspm_packages/
 
 # Yarn Integrity file
 .yarn-integrity
+
+# Memory data files (user-specific)
+command-memory.json
+context-memory.json
